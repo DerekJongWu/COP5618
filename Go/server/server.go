@@ -4,6 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"net"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
 type Client struct {
@@ -99,7 +102,21 @@ func NewChatRoom() *ChatRoom {
 	return chatRoom
 }
 
+func Listen(listener net.Listener, connections chan net.Conn) {
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		connections <- conn
+	}
+}
+
 func main() {
+	connections := make(chan net.Conn, 1)
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 	chatRoom := NewChatRoom()
 
 	listener, err := net.Listen("tcp", ":3000")
@@ -109,13 +126,16 @@ func main() {
 	}
 	defer listener.Close()
 
+	go Listen(listener, connections)
+
 	for {
-		conn, err := listener.Accept()
-		if err != nil {
-			fmt.Println(err)
+		select {
+		case <-sigs:
+			fmt.Println("Closing")
 			return
+		case conn := <-connections:
+			fmt.Println("Accepted connection")
+			chatRoom.joins <- conn
 		}
-		fmt.Println("Accepted connection")
-		chatRoom.joins <- conn
 	}
 }
