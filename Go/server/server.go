@@ -56,7 +56,6 @@ type ChatRoom struct {
 	clients  []*Client
 	joins    chan net.Conn
 	incoming chan string
-	outgoing chan string
 }
 
 func (chatRoom *ChatRoom) Broadcast(data string) {
@@ -93,7 +92,6 @@ func NewChatRoom() *ChatRoom {
 		clients:  make([]*Client, 0),
 		joins:    make(chan net.Conn),
 		incoming: make(chan string),
-		outgoing: make(chan string),
 	}
 
 	chatRoom.Listen()
