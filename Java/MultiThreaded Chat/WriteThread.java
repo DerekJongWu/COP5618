@@ -6,7 +6,6 @@ import java.net.*;
  * to the server.
  * It runs in an infinite loop until the user types 'bye' to quit.
  *
- * @author www.codejava.net
  */
 public class WriteThread extends Thread {
     private PrintWriter writer;
