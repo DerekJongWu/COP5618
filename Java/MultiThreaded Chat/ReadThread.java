@@ -6,7 +6,6 @@ import java.net.*;
  * to the console.
  * It runs in an infinite loop until the client disconnects from the server.
  *
- * @author www.codejava.net
  */
 public class ReadThread extends Thread {
     private BufferedReader reader;
