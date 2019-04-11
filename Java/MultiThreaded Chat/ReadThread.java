@@ -1,3 +1,5 @@
+package multichat;
+
 import java.io.*;
 import java.net.*;
  
@@ -6,6 +8,7 @@ import java.net.*;
  * to the console.
  * It runs in an infinite loop until the client disconnects from the server.
  *
+ * @author www.codejava.net
  */
 public class ReadThread extends Thread {
     private BufferedReader reader;
@@ -29,13 +32,19 @@ public class ReadThread extends Thread {
         while (true) {
             try {
                 String response = reader.readLine();
-                System.out.println("\n" + response);
+                if(response!=null)
+                	System.out.println("\n" + response);
  
                 // prints the username after displaying the server's message
                 if (client.getUserName() != null) {
                     System.out.print("[" + client.getUserName() + "]: ");
                 }
-            } catch (IOException ex) {
+            }
+            catch (SocketException se) {
+            	if(se.getMessage().contains("Socket closed"))
+            		break;
+            }
+            catch (IOException ex) {
                 System.out.println("Error reading from server: " + ex.getMessage());
                 ex.printStackTrace();
                 break;
