@@ -1,4 +1,4 @@
-package client
+package chattest
 
 import (
 	"bufio"
@@ -34,29 +34,30 @@ func handleDataInput(data []string, msg chan string) {
 	}
 }
 
-func main() {
+func startClient(data []string) {
 	msg := make(chan string, 1)
 	chat := make(chan string, 1)
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
 	conn, _ := net.Dial("tcp", "localhost:3000")
-	scanner := bufio.NewScanner(os.Stdin)
+	// scanner := bufio.NewScanner(os.Stdin)
 	reader := bufio.NewReader(conn)
 
-	go handleInput(scanner, msg)
+	// go handleInput(scanner, msg)
 	go listenForMessages(reader, chat)
+	go handleDataInput(data, msg)
 
-loop:
-	for {
-		select {
-		case <-sigs:
-			fmt.Println("Closing")
-			break loop
-		case s := <-msg:
-			fmt.Fprintf(conn, s+"\n")
-		case c := <-chat:
-			fmt.Print("> " + c)
-		}
-	}
+	// loop:
+	// 	for {
+	// 		select {
+	// 		case <-sigs:
+	// 			fmt.Println("Closing")
+	// 			break loop
+	// 		case s := <-msg:
+	// 			fmt.Fprintf(conn, s+"\n")
+	// 		case c := <-chat:
+	// 			fmt.Print("> " + c)
+	// 		}
+	// 	}
 }
