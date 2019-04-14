@@ -8,9 +8,7 @@ import java.util.List;
 /**
  * This is the chat client program.
  * Type 'bye' to terminte the program.
- *
- * @author www.codejava.net
- */
+ * */
 public class ChatClient {
     private String hostname;
     private int port;
