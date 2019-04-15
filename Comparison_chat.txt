@@ -6,8 +6,40 @@ Test2 : Creates 100 (variable) clients. Each client sends 2 strings (messages) t
 
 The below chart shows the results obtained by running the above two tests on the Java and the Go implementations.
 
-		Go			Java
+	
+		Run		Test1			Test2
 
-Test1		2.658834ms		11ms
 
-Test2 		8.915519ms 		129ms
+Java		1		6ms			182ms
+
+		2		6ms			112ms
+		
+		3		6ms			159ms
+		
+		4		5ms			120ms
+		
+		5		6ms			129ms		
+		
+		Avg		5.8ms			140.4ms
+		
+
+Go 		1		2.231ms			5.386ms
+
+		2		2.267ms			5.295ms
+		
+		3		2.821ms			5.423ms
+		
+		4		2.074ms			5.422ms
+		
+		5		2.291ms			5.744ms
+		
+		Avg		2.337ms			5.454ms
+		
+		
+		
+Conclusions
+------------
+
+1. Easier synchronization between client and server routines in Go due to message passing between channels. In Java, a ChatServer instance is shared between the different UserThreads that handle different clients. Hence synchronization is required when accessing fields of this shared instance. Much simpler in Go.
+2. Lesser code in Go.
+3. Go routines provide lesser overhead and shows lower running time for the same tests. (from table above)
