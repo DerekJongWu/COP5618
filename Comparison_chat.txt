@@ -6,8 +6,8 @@ Test2 : Creates 100 (variable) clients. Each client sends 2 strings (messages) t
 
 The below chart shows the results obtained by running the above two tests on the Java and the Go implementations.
 
-			Go 				Java
+		Go			Java
 
-Test1:		2.658834ms		8.915519ms
+Test1		2.658834ms		11ms
 
-Test2: 		11ms			129ms
+Test2 		8.915519ms 		129ms
