@@ -27,14 +27,18 @@ func handleInput(scanner *bufio.Scanner, msg chan string) {
 	}
 }
 
-func handleDataInput(data []string, msg chan string) {
+func handleDataInput(data []string, msg chan string, done chan bool) {
 	for i := 0; i < len(data); i++ {
 		m := data[i]
 		msg <- m
+		done <- true
+	}
+	if data == nil {
+		done <- true
 	}
 }
 
-func startClient(data []string) {
+func startClient(data []string, done chan bool) {
 	msg := make(chan string, 1)
 	chat := make(chan string, 1)
 	sigs := make(chan os.Signal, 1)
@@ -46,7 +50,7 @@ func startClient(data []string) {
 
 	// go handleInput(scanner, msg)
 	go listenForMessages(reader, chat)
-	go handleDataInput(data, msg)
+	go handleDataInput(data, msg, done)
 
 	// loop:
 	// 	for {

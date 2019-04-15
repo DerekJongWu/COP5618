@@ -1,0 +1,13 @@
+
+
+Test1 : Creates two clients. Client 1 sends a message to client2. Time elapsed in this process depicts the server broadcast latency ie.. the time taken by the server to get a message and broadcast to another client.
+
+Test2 : Creates 100 (variable) clients. Each client sends 2 strings (messages) to the server. The server broadcasts this to all other clients that are connected. The time elapsed in the process depicts the average time taken by the server to manage a fixed amount of clients.
+
+The below chart shows the results obtained by running the above two tests on the Java and the Go implementations.
+
+			Go 				Java
+
+Test1:		2.658834ms		8.915519ms
+
+Test2: 		11ms			129ms
