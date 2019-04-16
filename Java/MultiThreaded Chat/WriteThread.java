@@ -21,10 +21,12 @@ public class WriteThread extends Thread {
     private List<String> testData;
  
     public WriteThread(Socket socket, ChatClient client) {
+    	//Establish the server-client connection 
         this.socket = socket;
         this.client = client; 
  
         try {
+        	//Create the output stream 
             OutputStream output = socket.getOutputStream();
             writer = new PrintWriter(output, true);
         } catch (IOException ex) {
@@ -38,11 +40,12 @@ public class WriteThread extends Thread {
     	if(testData==null || testData.isEmpty()) {
 	        Console console = System.console();
 	        
-//	        String userName = console.readLine("\nEnter your name: ");
-	        
+	        //Create the reading stream 
 	        InputStreamReader streamReader = new InputStreamReader(System.in);
 	        BufferedReader bufferedReader = new BufferedReader(streamReader);
 	        String userName=null;
+	        
+	        //Submit your username as your first act of connecting to the server
 	        try {
 	        	System.out.println("Enter your name: ");
 				userName = bufferedReader.readLine();
@@ -52,9 +55,9 @@ public class WriteThread extends Thread {
 	        client.setUserName(userName);
 	        writer.println(userName);
 	        
+	        //write to the output stream to be sent to the server
 	        String text = null;
 	        do {
-//	            text = console.readLine("[" + userName + "]: ");
 	            try {
 					text = "[" + bufferedReader.readLine() + "]";
 				} catch (IOException e) {
