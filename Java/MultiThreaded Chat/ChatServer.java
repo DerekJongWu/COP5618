@@ -22,13 +22,15 @@ public class ChatServer {
     public void execute() { 
     	
         try (ServerSocket serverSocket = new ServerSocket(port)) {
- 
+        	//Set up the server so that it listens on the port number
             System.out.println("Chat Server is listening on port " + port);
  
             while (true) {
+            	//Accept any incoming connections
                 Socket socket = serverSocket.accept();
                 System.out.println("New user connected");
  
+                //Spawn a user thread to handle the input and output streams of the server and client connection
                 UserThread newUser = new UserThread(socket, this);
                 synchronized(uto){
                 	userThreads.add(newUser);
@@ -59,6 +61,7 @@ public class ChatServer {
      */
      void broadcast(String message, UserThread excludeUser) {
      	synchronized(uto) {
+     		//Send the message to all the connected users 
 	        for (UserThread aUser : userThreads) {
 	            if (aUser != excludeUser) {
 	                aUser.sendMessage(message);

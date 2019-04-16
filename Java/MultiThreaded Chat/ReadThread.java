@@ -14,10 +14,12 @@ public class ReadThread extends Thread {
     private ChatClient client;
  
     public ReadThread(Socket socket, ChatClient client) {
+    	//Create the socket connection between the client and the server
         this.socket = socket;
         this.client = client;
  
         try {
+        	//Create the input stream to read from server
             InputStream input = socket.getInputStream();
             reader = new BufferedReader(new InputStreamReader(input));
         } catch (IOException ex) {
@@ -29,6 +31,7 @@ public class ReadThread extends Thread {
     public void run() {
         while (true) {
             try {
+            	//Read message inputs from the client
                 String response = reader.readLine();
                 if(response!=null)
                 	System.out.println("\n" + response);

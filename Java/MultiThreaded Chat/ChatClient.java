@@ -23,11 +23,16 @@ public class ChatClient {
  
     public void execute() {
         try {
+        	
+        	//Connect to the server
             Socket socket = new Socket(hostname, port);
  
             System.out.println("Connected to the chat server");
  
+            //spawn a read thread to monitor incoming messages from the server. 
             new ReadThread(socket, this).start();
+            
+            //spawn a write thread to concurrently mointor input from the user 
             WriteThread wt =  new WriteThread(socket, this);
             if(testData!=null)
             	ChatTest.writers.add(wt);
