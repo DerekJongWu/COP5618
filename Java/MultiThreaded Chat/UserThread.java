@@ -23,20 +23,25 @@ public class UserThread extends Thread {
  
     public void run() {
         try {
+        	//Create input and output streams for reading and writing
             InputStream input = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
  
             OutputStream output = socket.getOutputStream();
             writer = new PrintWriter(output, true);
  
+            //Send a list of connected users to the newly connected client
             printUsers();
  
+            //Read the username submitted by the client
             String userName = reader.readLine();
             server.addUserName(userName); 
- 
+            
+            //Alert all connected users that a new client has joined.
             String serverMessage = "New user connected: " + userName;
             server.broadcast(serverMessage, this);
  
+            //Process all incoming messages
             String clientMessage;
  
             do {
