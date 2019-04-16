@@ -1,7 +1,7 @@
 # COP5618
 Concurrent Programming Project
 
-Project Topic: The objective of the project is to perform a qualitative and quantitative comparison of two different coding languages: GoLang and Java. By implmenting a multiclient chat room, the project is able to explore multiple characteristics of concurrency and provides a good method to compare both languages. 
+Project Topic: The objective of the project is to perform a qualitative and quantitative comparison of two different coding languages: GoLang and Java. Go and Java offer two different concurrent coding philosophies. Go provides an abstraction called channels while Java offers the basic thread and shared variables paradigm. By implmenting a multiclient chat room, the project is able to explore multiple characteristics of concurrency and provides a good method to compare both languages. 
 
 Project Members - GitID: 
 Derek Wu - DerekJongWu
