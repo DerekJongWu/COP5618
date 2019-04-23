@@ -22,9 +22,9 @@ GO
 To run go code: 
 
 1.  start server : cd COP5618/Go/cd server
-                   go server.go
+                   go run server.go
 2.  start client : cd COP5618/Go/client
-                   go client.go
+                   go run client.go
 
 To run go test:
 
