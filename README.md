@@ -21,15 +21,12 @@ GO
 
 To run go code: 
 
-1.  start server : cd COP5618/Go/cd server
-                   go run server.go
-2.  start client : cd COP5618/Go/client
-                   go run client.go
+1.  start server : cd COP5618/Go/cd server; go run server.go;
+2.  start client : cd COP5618/Go/client; go run client.go
 
 To run go test:
 
-cd COP5618/Go
-go test-v
+cd COP5618/Go; go test-v
 
 Java
 ------
