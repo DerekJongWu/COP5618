@@ -11,4 +11,5 @@ Steps to run:
 2. Run ChatServer [port number] 
 3. Run ChatClient [IP address] [port number] 
 
+Run Test
 java -cp .:../lib/junit-4.12.jar:../lib/hamcrest-all-1.3.jar org.junit.runner.JUnitCore multichat.ChatTest
