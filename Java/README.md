@@ -10,3 +10,5 @@ Steps to run:
 1. Compile all java files: ChatClient.java ChatServer.java UserThread.java WriteThread.java ReadThread.java
 2. Run ChatServer [port number] 
 3. Run ChatClient [IP address] [port number] 
+
+java -cp .:../lib/junit-4.12.jar:../lib/hamcrest-all-1.3.jar org.junit.runner.JUnitCore multichat.ChatTest
